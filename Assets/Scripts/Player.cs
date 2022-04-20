@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
 
 
     bool isGrounded;
+    public bool hasKey = false;
+    public bool isTriggerWithKey;
+    public bool isTriggerWithKeyHole;
+    public bool open;
 
     void Start()
     {
@@ -45,6 +49,16 @@ public class Player : MonoBehaviour
             rb.AddForce(-transform.right * thrustH, ForceMode2D.Impulse);
         }
 
+        if(Input.GetAxis("Pick Up") == 1 && isTriggerWithKey)
+        {
+            hasKey = true;
+        }
+
+        if (Input.GetAxis("Pick Up") == 1 && isTriggerWithKeyHole && hasKey)
+        {
+            open = true;
+        }
+
     }
 
     bool IsGrounded()
@@ -61,5 +75,7 @@ public class Player : MonoBehaviour
 
         return false;
     }
+
+ 
 
 }
